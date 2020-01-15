@@ -1,14 +1,19 @@
 version: '3'
 
 services:
+  # Defines postgres database service
   db:
     image: postgres
+
+  # Defines app service
   app:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
+    # Exposes ports 8000 on host and client
     ports:
       - "8000:8000"
+    # Defines app dependencies
     depends_on:
       - db
